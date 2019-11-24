@@ -28,6 +28,10 @@ if(isset($_POST['registerButton'])) {
     $password = sanitizeFormPassword($_POST['password']);
     $password2 = sanitizeFormPassword($_POST['password2']);
 
-    $account->register($userName, $firstName, $lastName, $email, $email2, $password, $password2);
+    $wasSuccessful = $account->register($userName, $firstName, $lastName, $email, $email2, $password, $password2);
+    if($wasSuccessful) {
+        echo "Wszystko jest ok";
+        //header("Location: index.php");
+    }
 }
 ?>

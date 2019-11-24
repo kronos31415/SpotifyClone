@@ -1,7 +1,7 @@
 <?php
     class Account {
 
-        private $errorArray;
+        private $errorArray = array("title" => array(), "type" => array());
 
         public function __constructor() {
             $this->errorArray = array();
@@ -13,6 +13,20 @@
             $this->validateLastName($ln);
             $this->validateEmails($em, $em2);
             $this->validatePasswords($pass, $pass2);
+
+            if(empty($this->errorArray)) {
+                //Insert into DB
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function getError($error) {
+            if(!in_array($error, $this->errorArray)) {
+                $error = "";
+            }
+            return "<span class = 'errorMessage'>$error</span>";
         }
 
         private function validateUserName($us) {
@@ -39,12 +53,12 @@
         
         private function validateEmails($em1, $em2) {
             if($em1 != $em2) {
-                array_push($this->errorArray, "Your emails don't matchr");
+                array_push($this->errorArray, "Your emails don't match");
                 return;
             }
 
             if(!filter_var($em1, FILTER_VALIDATE_EMAIL)) {
-                array_push($this->errorArray, " Email is invalid");
+                array_push($this->errorArray, "Email is invalid");
                 return;
             }
 

@@ -30,21 +30,26 @@
             <form id = "registerForm" action="register.php" method="POST">
                 <h2>Create your free Account</h2>
                 <p>
+                    <?php echo $account->getError("Your userName must be between 5 and 25 character"); ?>
                     <label for = "userName">UserName</label>
                     <input id = "userName" name = "userName" type = "text" placeholder = "Enter login" required>
                 </p>
 
                 <p>
+                    <?php echo $account->getError("Your first name must be between 2 and 25 character"); ?>
                     <label for = "firstName">First Name</label>
                     <input id = "firstName" name = "firstName" type = "text" placeholder = "e.g Pawel" required>
                 </p>
 
                 <p>
-                    <label for = "lastName">UserName</label>
+                    <?php echo $account->getError("Your last name must be between 2 and 25 character"); ?>
+                    <label for = "lastName">Last Name</label>
                     <input id = "lastName" name = "lastName" type = "text" placeholder = "e.g Zarzycki" required>
                 </p>
 
                 <p>
+                    <?php echo $account->getError("Your emails don't match"); ?>
+                    <?php echo $account->getError("Email is invalid"); ?>
                     <label for = "email">Email</label>
                     <input id = "email" name = "email" type = "email" placeholder = "e.g pawel.zarzycki@op.pl" required>
                 </p>
@@ -54,6 +59,9 @@
                     <input id = "email2" name = "email2" type = "email" placeholder = "e.g pawel.zarzycki@op.pl" required>
                 </p>
                 <p>
+                    <?php echo $account->getError("Your passwords don't matchr"); ?>
+                    <?php echo $account->getError("Your passwords can contain only numbers and leters"); ?>
+                    <?php echo $account->getError("Your password must be between 5 and 25 character"); ?>
                     <label for = "password">Password</label>
                     <input id = "password" name = "password" type = "password" required>
                 </p>
