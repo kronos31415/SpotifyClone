@@ -30,6 +30,20 @@ body {
     max-width: 1024px;
 }
 
+::-webkit-input-placeholder {
+    /* Edge */
+    color: #fff;
+}
+
+ :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #fff;
+}
+
+ ::placeholder {
+    color: #fff;
+}
+
 #inputContainer {
     width: 400px;
     padding: 45px;
@@ -51,4 +65,35 @@ body {
     height: 27px;
     line-height: 27px;
     width: 100%;
+}
+
+#inputContainer label {
+    color: #a0a0a0;
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+#inputContainer button {
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin: 20px auto;
+    height: 40px;
+    width: 100%;
+}
+
+#inputContainer button:hover {
+    cursor: pointer;
+}
+
+.hasAccountText span {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.hasAccountText {
+    text-align: center;
 }

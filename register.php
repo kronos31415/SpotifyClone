@@ -38,6 +38,11 @@
                         <input id="loginPassword" name="loginPassword" type="password" required>
                     </p>
                     <button type="submit" name="loginButton"> LOG IN</button>
+
+                    <div class="hasAccountText">
+                        <span id = "hideLogin">Dont't have account yet? Signup here</span>
+                    </div>
+
                 </form>
 
                 <form id="registerForm" action="register.php" method="POST">
@@ -91,6 +96,11 @@
                         <input id="password2" name="password2" type="password" required>
                     </p>
                     <button type="submit" name="registerButton">SIGN UP</button>
+
+                    <div class="hasAccountText">
+                        <span id = "hideRegister">Already have an account? Login here.</span>
+                    </div>
+
                 </form>
             </div>
         </div>
