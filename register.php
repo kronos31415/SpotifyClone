@@ -25,6 +25,7 @@
             <form id = "loginForm" action="register.php" method="POST">
                 <h2>Login to Your Account</h2>
                 <p>
+                    <?php echo $account->getError(Constants::$loginFailed); ?>
                     <label for = "loginUserName">UserName</label>
                     <input id = "loginUserName" name = "loginUserName" type = "text" placeholder = "Enter login" required>
                 </p>
@@ -39,6 +40,7 @@
                 <h2>Create your free Account</h2>
                 <p>
                     <?php echo $account->getError(Constants::$userNameCharacters); ?>
+                    <?php echo $account->getError(Constants::$usernameTaken); ?>
                     <label for = "userName">UserName</label>
                     <input id = "userName" name = "userName" type = "text" placeholder = "Enter login" value="<?php getInputValue('userName') ?>" required>
                 </p>
@@ -58,6 +60,7 @@
                 <p>
                     <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
                     <?php echo $account->getError(Constants::$emailInvalid); ?>
+                    <?php echo $account->getError(Constants::$emailTaken); ?>
                     <label for = "email">Email</label>
                     <input id = "email" name = "email" type = "email" placeholder = "e.g pawel.zarzycki@op.pl" value="<?php getInputValue('email') ?>" required>
                 </p>

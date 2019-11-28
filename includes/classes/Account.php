@@ -9,6 +9,20 @@
             $this->errorArray = array();
         }
 
+        public function login($un, $pass) {
+            $p = substr(md5($pass),0,24);
+            var_dump($pass);
+
+            $query = mysqli_query($this->con, "SELECT username FROM users WHERE username ='$un' AND passwordd = '$p'");
+            var_dump(mysqli_num_rows($query));
+            if(mysqli_num_rows($query) == 1) {
+                return true;
+            } else {
+                array_push($this->errorArray, Constants::$loginFailed);
+                return false;
+            }
+        }
+
         public function register($un, $fn, $ln, $em, $em2, $pass, $pass2) {
             $this->validateUserName($un);
             $this->validateFirstName($fn);
@@ -31,7 +45,7 @@
         }
 
         private function insertUserDetails($un, $fn, $ln, $em, $pw) {
-            $encryptedPw = md5($pw);
+            $encryptedPw = substr(md5($pw),0,24);
             $profilePic = "assets/images/profile-pics/head-emerald.png";
             $date = date("Y-m-d");
             $result = mysqli_query($this->con, "INSERT INTO users VALUES('', '$un', '$fn', '$ln', '$em', '$encryptedPw', '$date', '$profilePic')");
@@ -41,6 +55,13 @@
         private function validateUserName($us) {
             if(strlen($us) > 25 || strlen($us) < 5) {
                 array_push($this->errorArray, Constants::$userNameCharacters);
+                return;
+            }
+
+            $checkUsernameQuery = mysqli_query($this->con, "SELECT username FROM users WHERE username ='$us'");
+
+            if(mysqli_num_rows($checkUsernameQuery) != 0) {
+                array_push($this->errorArray, Constants::$usernameTaken);
                 return;
             }
         }
@@ -68,6 +89,13 @@
 
             if(!filter_var($em1, FILTER_VALIDATE_EMAIL)) {
                 array_push($this->errorArray, Constants::$emailInvalid);
+                return;
+            }
+
+            $checkEmailQuery = mysqli_query($this->con, "SELECT email FROM users WHERE email ='$em1'");
+
+            if(mysqli_num_rows($checkEmailQuery) != 0) {
+                array_push($this->errorArray, Constants::$emailTaken);
                 return;
             }
         }
