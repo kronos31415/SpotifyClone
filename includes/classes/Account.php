@@ -11,10 +11,8 @@
 
         public function login($un, $pass) {
             $p = substr(md5($pass),0,24);
-            var_dump($pass);
 
             $query = mysqli_query($this->con, "SELECT username FROM users WHERE username ='$un' AND passwordd = '$p'");
-            var_dump(mysqli_num_rows($query));
             if(mysqli_num_rows($query) == 1) {
                 return true;
             } else {

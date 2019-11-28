@@ -97,3 +97,13 @@ body {
 .hasAccountText {
     text-align: center;
 }
+
+#registerForm,
+#loginForm {
+    display: none;
+}
+
+#hideLogin,
+#hideRegister {
+    cursor: pointer;
+}
