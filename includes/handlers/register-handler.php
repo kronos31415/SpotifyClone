@@ -30,7 +30,7 @@ if(isset($_POST['registerButton'])) {
 
     $wasSuccessful = $account->register($userName, $firstName, $lastName, $email, $email2, $password, $password2);
     if($wasSuccessful) {
-        echo "Wszystko jest ok";
+        $_SESSION['userLoggedIn'] = $userName;
         header("Location: index.php");
     }
 }
