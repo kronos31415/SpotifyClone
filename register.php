@@ -124,6 +124,21 @@
 
                 </form>
             </div>
+
+            <div id="loginText">
+                <h1>
+                    Get Great Music
+                </h1>
+                <h2>
+                    Listen to loads of songs for free
+                </h2>
+                <ul>
+                    <li>Odkrywaj muzyke ktora kochasz</li>
+                    <li>Tworz swoja playliste</li>
+                    <li>Podazaj za swiatowymi tredami</li>
+                </ul>
+            </div>
+
         </div>
     </div>
 </body>

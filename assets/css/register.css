@@ -107,3 +107,29 @@ body {
 #hideRegister {
     cursor: pointer;
 }
+
+#loginText {
+    padding: 45;
+    display: table-cell;
+}
+
+#loginText h1 {
+    color: #6bf11c;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+#loginText h2 {
+    margin: 40px 0;
+}
+
+#loginText ul {
+    padding: 0;
+}
+
+#loginText li {
+    font-size: 22px;
+    list-style-type: none;
+    padding: 30px 70px;
+    background: url(../images/icons/check.png) no-repeat;
+}
