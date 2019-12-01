@@ -1,0 +1,35 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+#nowPlayingBarContainer {
+    width: 100%;
+    background-color: #131212;
+    bottom: 0;
+    position: fixed;
+    min-width: 620px;
+}
+
+#nowPlayingBar {
+    display: flex;
+    height: 90px;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+#nowPlayingLeft,
+#nowPlayingRight {
+    width: 30%;
+    min-width: 200px;
+}
+
+#nowPlayingCenter {
+    width: 40%;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
