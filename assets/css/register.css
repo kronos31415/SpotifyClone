@@ -71,6 +71,7 @@ body {
     color: #a0a0a0;
     font-size: 13px;
     margin-top: 15px;
+    display: block;
 }
 
 #inputContainer button {
@@ -132,4 +133,10 @@ body {
     list-style-type: none;
     padding: 30px 70px;
     background: url(../images/icons/check.png) no-repeat;
+}
+
+#inputContainer .errorMessage {
+    color: #6bf11c;
+    font-size: 12px;
+    display: block;
 }
