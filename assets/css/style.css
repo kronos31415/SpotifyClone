@@ -5,9 +5,16 @@ body {
     height: 100%;
 }
 
+body {
+    background-color: #181818;
+    font-size: 14px;
+    min-width: 730px;
+}
+
 * {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #fff;
+    letter-spacing: 1px;
 }
 
 #nowPlayingBarContainer {
@@ -198,4 +205,45 @@ body {
     right: 0;
     top: -2px;
     width: 40px;
+}
+
+#mainViewContainer {
+    margin-left: 220px;
+    padding-bottom: 90px;
+    width: calc(100% - 220px);
+}
+
+#mainContent {
+    padding: 0 20px;
+}
+
+.pageHeading {
+    padding: 20px;
+    text-align: center;
+}
+
+.gridViewItem {
+    display: inline-block;
+    margin-right: 20px;
+    width: 29%;
+    max-width: 200px;
+    min-width: 150px;
+    margin-bottom: 20px;
+}
+
+.gridViewItem img {
+    width: 100%
+}
+
+.gridViewInfo {
+    font_weight: 300;
+    text-align: center;
+    padding: 5px 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.gridViewItem a {
+    text-decoration: none;
 }
