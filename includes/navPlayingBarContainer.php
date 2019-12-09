@@ -18,8 +18,8 @@
 
 	function setTrack(trackId, newPlayList, play) {
 	
-		$.post("", {songId: trackId}, function(data) {
-
+		$.post("includes/handlers/ajax/getSongJson.php", {songId: trackId}, function(data) {
+			console.log(data);
 		});
 
 		if(play) {
