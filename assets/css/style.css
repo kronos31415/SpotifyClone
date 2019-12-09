@@ -73,7 +73,7 @@ body {
 }
 
 .controlButton.play img,
-.controlButton.play img {
+.controlButton.pause img {
     width: 32px;
     height: 32px;
 }
@@ -288,4 +288,68 @@ body {
     height: 40px;
     padding: 15px 10px;
     list-style: none;
+}
+
+.trackListRow span {
+    color: #939393;
+    font-weight: 200;
+}
+
+.trackListRow:hover {
+    background-color: #202020;
+}
+
+.trackListRow .trackCount {
+    width: 8%;
+    float: left;
+}
+
+.trackListRow .trackCount img {
+    width: 20px;
+    visibility: hidden;
+    position: absolute;
+    cursor: pointer;
+}
+
+.trackListRow:hover .trackCount img {
+    visibility: visible;
+}
+
+.trackListRow:hover .trackCount span {
+    visibility: hidden;
+}
+
+.trackListRow .trackInfo {
+    width: 70%;
+    float: left;
+}
+
+.trackListRow .trackInfo span {
+    display: block;
+}
+
+.trackListRow .trackOptions {
+    width: 6%;
+    float: left;
+    text-align: right;
+}
+
+.trackListRow .trackInfo img {
+    width: 15px;
+    visibility: hidden;
+}
+
+.trackListRow:hover .trackInfo img {
+    visibility: visible;
+}
+
+.trackListRow .trackDuration {
+    width: 12%;
+    float: left;
+    text-align: right;
+}
+
+.trackListRow .trackInfo .trackName {
+    color: white;
+    margin-bottom: 7px;
 }
