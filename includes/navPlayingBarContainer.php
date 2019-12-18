@@ -6,7 +6,7 @@
 	}
 
 	$jsonArray = json_encode($resultArray);
-
+// var_dump(json_encode($resultArray));
 ?>
 
 <script>
@@ -14,12 +14,104 @@
 		currentPlayList = <?php echo $jsonArray ;?>;
 		audioElement = new Audio();
 		setTrack(currentPlayList[0], currentPlayList, false);
-	})
+		updateVolumeProgressBar(audioElement.audio);
+
+		$('#nowPlayingBar').on('mousedown touchstart mousemove touchmove', function(event) {
+			event.preventDefault();
+		})
+
+		$('.playbackBar .progressBar').mousedown(function() {
+			mouseDown = true;
+		})
+
+		$('.playbackBar .progressBar').mousemove(function(event) {
+			if(mouseDown) {
+				timeFromOffset(event, this);
+			}
+		})
+
+		$('.playbackBar .progressBar').mouseup(function(event) {
+			timeFromOffset(event, this);
+		});
+
+		$(document).mouseup(function() {
+			mouseDown = false;
+		})
+
+
+
+		$('.volumeBar .progressBar').mousedown(function() {
+			mouseDown = true;
+		})
+
+		$('.volumeBar .progressBar').mousemove(function(event) {
+			if(mouseDown) {
+				let percentage = event.offsetX / $(this).width();
+				audioElement.audio.volume = percentage;
+			}
+		})
+
+		$('.volumeBar .progressBar').mouseup(function(event) {
+			let percentage = event.offsetX / $(this).width();
+			audioElement.audio.volume = percentage;
+		});
+
+		
+
+
+	});
+	function timeFromOffset(mouse, progresBar) {
+		let percentage = mouse.offsetX / $(progresBar).width() * 100;
+		let seconds = audioElement.audio.duration * (percentage / 100);
+		audioElement.setTime(seconds);
+	}
+	function setRepeat() {
+		repeat = !repeat;
+		let imageName = repeat ? "repeat-active.png" : "repeat.png";
+		$('.controlButton.repaeat img').attr("src", "assets/images/icons/" + imageName);
+	}
+
+	function playNextSong() {
+		if(repeat == true) {
+			audioElement.setTime(0);
+			playSong();
+			return;
+		}
+		if(currentIndex == currentPlayList.length - 1) {
+			currentIndex = 0;
+		} else {
+			currentIndex++;
+		}
+		let trackToPlay = currentPlayList[currentIndex];
+		console.log(trackToPlay);
+		setTrack(trackToPlay, currentPlayList, false);
+		playSong();
+	}
+
+
 
 	function setTrack(trackId, newPlayList, play) {
+		let currentIndex = currentPlayList.indexOf(trackId);
+		pauseSong();
 	
 		$.post("includes/handlers/ajax/getSongJson.php", {songId: trackId}, function(data) {
-			console.log(data);
+
+			let track = JSON.parse(data);
+			$('.trackName span').text(track.title);
+
+			$.post("includes/handlers/ajax/getArtistJson.php", {artistId: track.artist }, function(data) {
+				let artist = JSON.parse(data);
+				// console.log(artist.name);
+				$('.artistName span').text(artist.name);
+			});
+
+			$.post("includes/handlers/ajax/getAlbumJson.php", {albumId: track.album }, function(data) {
+				let album = JSON.parse(data);
+				$('.albumLink img').attr("src", album.artworkPath);
+			});
+
+			audioElement.setTrack(track);
+			playSong();
 		});
 
 		if(play) {
@@ -27,6 +119,12 @@
 		}
 	}
 	function playSong() {
+
+		if(audioElement.audio.currentTime == 0) {
+			// console.log(audioElement.currentlyPlaying.id, "id");
+			$.post("includes/handlers/ajax/updatePlays.php", {songId: audioElement.currentlyPlaying.id});
+		}
+
 		audioElement.play();
 		$('.controlButton.play').hide();
 		$('.controlButton.pause').show();
@@ -46,16 +144,16 @@
 				<div id="nowPlayingLeft">
 					<div class="content">
 						<span class="albumLink">
-							<img src="https://www.google.com/search?q=square+image&sxsrf=ACYBGNQxF_HWj131vp42eLUB0M6mClM5zg:1575196447514&tbm=isch&source=iu&ictx=1&fir=cy7rn6sA40_R_M%253A%252CJ9cL_7N9OSGndM%252C_&vet=1&usg=AI4_-kSdU4i_ukwu8bs8boe4nTN4ejnIkg&sa=X&ved=2ahUKEwiXjtKFoJTmAhWSp4sKHa4hBS8Q9QEwA3oECAgQCg#imgrc=cy7rn6sA40_R_M:"
+							<img src=""
 								class="albumArtWork">
 						</span>
 						<div class="trackInfo">
 
 							<span class="trackName">
-								<span>Happy Birthday</span>
+								<span></span>
 							</span>
 							<span class="artistName">
-								<span>PAwel Zarzycki</span>
+								<span></span>
 							</span>
 
 						</div>
@@ -81,11 +179,11 @@
 								<img src="assets/images/icons/pause.png" alt="Pause">
 							</button>
 
-							<button class="controlButton next" title="Next button">
+							<button class="controlButton next" title="Next button" onclick="playNextSong()">
 								<img src="assets/images/icons/next.png" alt="Next">
 							</button>
 
-							<button class="controlButton repaeat" title="Repeat button">
+							<button class="controlButton repaeat" title="Repeat button" onclick = "setRepeat()">
 								<img src="assets/images/icons/repeat.png" alt="Repeat">
 							</button>
 						</div>
